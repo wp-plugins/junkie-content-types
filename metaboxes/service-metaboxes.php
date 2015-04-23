@@ -6,14 +6,14 @@
 /**
  * Replace 'Featured Image' title.
  */
-function junkie_types_service_replace_featured_image_title() {
+function junkie_types_services_replace_featured_image_title() {
 
 	// Check current screen.
-	if ( 'service' != get_current_screen()->post_type )
+	if ( 'services' != get_current_screen()->post_type )
 		return;
 
-    remove_meta_box( 'postimagediv', 'service', 'side' );
-    add_meta_box( 'postimagediv', __( 'Service Picture', 'junkie-types' ), 'post_thumbnail_meta_box', 'service', 'side', 'default' );
+    remove_meta_box( 'postimagediv', 'services', 'side' );
+    add_meta_box( 'postimagediv', __( 'Service Picture', 'junkie-types' ), 'post_thumbnail_meta_box', 'services', 'side', 'default' );
 
 }
-add_action( 'do_meta_boxes', 'junkie_types_service_replace_featured_image_title' );
+add_action( 'do_meta_boxes', 'junkie_types_services_replace_featured_image_title' );

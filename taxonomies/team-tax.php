@@ -35,7 +35,7 @@ function junkie_types_register_position_tax() {
 		'rewrite'           => array( 'slug' => 'position' ),
 	);
 
-	register_taxonomy( 'position', 'team', apply_filters( 'junkie_types_position_tax_args', $args ) );
+	register_taxonomy( 'position', 'teams', apply_filters( 'junkie_types_position_tax_args', $args ) );
 
 }
 add_action( 'init', 'junkie_types_register_position_tax' );

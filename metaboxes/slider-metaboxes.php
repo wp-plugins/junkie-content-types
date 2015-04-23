@@ -6,39 +6,39 @@
 /**
  * Registers new meta boxes.
  */
-function junkie_types_register_slider_metaboxes() {
+function junkie_types_register_sliders_metaboxes() {
 
 	// Check current screen.
-	if ( 'slider' != get_current_screen()->post_type )
+	if ( 'sliders' != get_current_screen()->post_type )
 		return;
 
 	// Register the meta box.
 	add_meta_box( 
-		'junkie-types-slider-metaboxes',
+		'junkie-types-sliders-metaboxes',
 		esc_html__( 'Slide URL', 'junkie-types' ),
-		'junkie_types_slider_metaboxes_display',
-		'slider',
+		'junkie_types_sliders_metaboxes_display',
+		'sliders',
 		'side',
 		'default'
 	);
 
 }
-add_action( 'add_meta_boxes', 'junkie_types_register_slider_metaboxes' );
+add_action( 'add_meta_boxes', 'junkie_types_register_sliders_metaboxes' );
 
 /**
  * Displays the content of the meta boxes.
  */
-function junkie_types_slider_metaboxes_display( $post ) {
+function junkie_types_sliders_metaboxes_display( $post ) {
 
-	wp_nonce_field( basename( __FILE__ ), 'junkie-types-slider-metaboxes-nonce' ); ?>
+	wp_nonce_field( basename( __FILE__ ), 'junkie-types-sliders-metaboxes-nonce' ); ?>
 
-	<?php do_action( 'junkie_types_slider_metaboxes_before' ); ?>
+	<?php do_action( 'junkie_types_sliders_metaboxes_before' ); ?>
 	
 		<p>
-			<input type="text" name="junkie-types-slider-url" id="junkie-types-slider-url" value="<?php echo esc_url( get_post_meta( $post->ID, 'junkie_types_slider_url', true ) ); ?>" size="30" style="width: 99%;" placeholder="<?php echo esc_attr( 'http://' ); ?>" />
+			<input type="text" name="junkie-types-sliders-url" id="junkie-types-sliders-url" value="<?php echo esc_url( get_post_meta( $post->ID, 'junkie_types_sliders_url', true ) ); ?>" size="30" style="width: 99%;" placeholder="<?php echo esc_attr( 'http://' ); ?>" />
 		</p>
 
-	<?php do_action( 'junkie_types_slider_metaboxes_after' ); ?>
+	<?php do_action( 'junkie_types_sliders_metaboxes_after' ); ?>
 
 	<?php
 }
@@ -46,16 +46,16 @@ function junkie_types_slider_metaboxes_display( $post ) {
 /**
  * Saves the metadata.
  */
-function junkie_types_slider_save_metaboxes( $post_id, $post ) {
+function junkie_types_sliders_save_metaboxes( $post_id, $post ) {
 
-	if ( ! isset( $_POST['junkie-types-slider-metaboxes-nonce'] ) || ! wp_verify_nonce( $_POST['junkie-types-slider-metaboxes-nonce'], basename( __FILE__ ) ) )
+	if ( ! isset( $_POST['junkie-types-sliders-metaboxes-nonce'] ) || ! wp_verify_nonce( $_POST['junkie-types-sliders-metaboxes-nonce'], basename( __FILE__ ) ) )
 		return;
 
 	if ( ! current_user_can( 'edit_post', $post_id ) )
 		return;
 
 	$meta = array(
-		'junkie_types_slider_url'  => esc_url_raw( $_POST['junkie-types-slider-url'] ),
+		'junkie_types_sliders_url'  => esc_url_raw( $_POST['junkie-types-sliders-url'] ),
 	);
 
 	foreach ( $meta as $meta_key => $new_meta_value ) {
@@ -77,19 +77,19 @@ function junkie_types_slider_save_metaboxes( $post_id, $post ) {
 	}
 
 }
-add_action( 'save_post', 'junkie_types_slider_save_metaboxes', 10, 2 );
+add_action( 'save_post', 'junkie_types_sliders_save_metaboxes', 10, 2 );
 
 /**
  * Replace 'Featured Image' title.
  */
-function junkie_types_slider_replace_featured_image_title() {
+function junkie_types_sliders_replace_featured_image_title() {
 
 	// Check current screen.
-	if ( 'slider' != get_current_screen()->post_type )
+	if ( 'sliders' != get_current_screen()->post_type )
 		return;
 
-    remove_meta_box( 'postimagediv', 'slider', 'side' );
-    add_meta_box( 'postimagediv', __( 'Slider Image', 'junkie-types' ), 'post_thumbnail_meta_box', 'slider', 'side', 'default' );
+    remove_meta_box( 'postimagediv', 'sliders', 'side' );
+    add_meta_box( 'postimagediv', __( 'Slider Image', 'junkie-types' ), 'post_thumbnail_meta_box', 'sliders', 'side', 'default' );
 
 }
-add_action( 'do_meta_boxes', 'junkie_types_slider_replace_featured_image_title' );
+add_action( 'do_meta_boxes', 'junkie_types_sliders_replace_featured_image_title' );

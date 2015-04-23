@@ -6,14 +6,14 @@
 /**
  * Replace 'Featured Image' title.
  */
-function junkie_types_feature_replace_featured_image_title() {
+function junkie_types_features_replace_featuresd_image_title() {
 
 	// Check current screen.
-	if ( 'feature' != get_current_screen()->post_type )
+	if ( 'features' != get_current_screen()->post_type )
 		return;
 
-    remove_meta_box( 'postimagediv', 'feature', 'side' );
-    add_meta_box( 'postimagediv', __( 'Feature Picture', 'junkie-types' ), 'post_thumbnail_meta_box', 'feature', 'side', 'default' );
+    remove_meta_box( 'postimagediv', 'features', 'side' );
+    add_meta_box( 'postimagediv', __( 'Feature Picture', 'junkie-types' ), 'post_thumbnail_meta_box', 'features', 'side', 'default' );
 
 }
-add_action( 'do_meta_boxes', 'junkie_types_feature_replace_featured_image_title' );
+add_action( 'do_meta_boxes', 'junkie_types_features_replace_featuresd_image_title' );
