@@ -6,45 +6,45 @@
 /**
  * Registers new meta boxes.
  */
-function junkie_types_register_testimonials_metaboxes() {
+function junkie_types_register_testimonial_metaboxes() {
 
 	// Check current screen.
-	if ( 'testimonials' != get_current_screen()->post_type )
+	if ( 'testimonial' != get_current_screen()->post_type )
 		return;
 
 	// Register the meta box.
 	add_meta_box( 
-		'junkie-types-testimonials-metaboxes',
+		'junkie-types-testimonial-metaboxes',
 		esc_html__( 'Customer Options', 'junkie-types' ),
-		'junkie_types_testimonials_metaboxes_display',
-		'testimonials',
+		'junkie_types_testimonial_metaboxes_display',
+		'testimonial',
 		'normal',
 		'high'
 	);
 
 }
-add_action( 'add_meta_boxes', 'junkie_types_register_testimonials_metaboxes' );
+add_action( 'add_meta_boxes', 'junkie_types_register_testimonial_metaboxes' );
 
 /**
  * Displays the content of the meta boxes.
  */
-function junkie_types_testimonials_metaboxes_display( $post ) {
+function junkie_types_testimonial_metaboxes_display( $post ) {
 
-	wp_nonce_field( basename( __FILE__ ), 'junkie-types-testimonials-metaboxes-nonce' ); ?>
+	wp_nonce_field( basename( __FILE__ ), 'junkie-types-testimonial-metaboxes-nonce' ); ?>
 
-	<?php do_action( 'junkie_types_testimonials_metaboxes_before' ); ?>
+	<?php do_action( 'junkie_types_testimonial_metaboxes_before' ); ?>
 
 	<div id="junkie-types-block">
 
 		<div class="junkie-types-label">
-			<label for="junkie-types-testimonials-website-name">
+			<label for="junkie-types-testimonial-website-name">
 				<strong><?php _e( 'Website Name', 'junkie-types' ); ?></strong><br />
 				<span class="description"><?php _e( "Customer's website name.", 'junkie-types' ); ?></span>
 			</label>
 		</div>
 
 		<div class="junkie-types-input">
-			<input type="text" name="junkie-types-testimonials-website-name" id="junkie-types-testimonials-website-name" value="<?php echo esc_attr( get_post_meta( $post->ID, 'junkie_types_testimonials_website_name', true ) ); ?>" size="30" style="width: 99%;" placeholder="<?php echo esc_attr( 'Google' ); ?>" />
+			<input type="text" name="junkie-types-testimonial-website-name" id="junkie-types-testimonial-website-name" value="<?php echo esc_attr( get_post_meta( $post->ID, 'junkie_types_testimonial_website_name', true ) ); ?>" size="30" style="width: 99%;" placeholder="<?php echo esc_attr( 'Google' ); ?>" />
 		</div>
 
 	</div><!-- #junkie-types-block -->
@@ -52,14 +52,14 @@ function junkie_types_testimonials_metaboxes_display( $post ) {
 	<div id="junkie-types-block">
 
 		<div class="junkie-types-label">
-			<label for="junkie-types-testimonials-website-url">
+			<label for="junkie-types-testimonial-website-url">
 				<strong><?php _e( 'Website URL', 'junkie-types' ); ?></strong><br />
 				<span class="description"><?php _e( "Customer's website url", 'junkie-types' ); ?></span>
 			</label>
 		</div>
 
 		<div class="junkie-types-input">
-			<input type="text" name="junkie-types-testimonials-website-url" id="junkie-types-testimonials-website-url" value="<?php echo esc_url( get_post_meta( $post->ID, 'junkie_types_testimonials_website_url', true ) ); ?>" size="30" style="width: 99%;" placeholder="<?php echo esc_attr( 'http://www.google.com/' ); ?>" />
+			<input type="text" name="junkie-types-testimonial-website-url" id="junkie-types-testimonial-website-url" value="<?php echo esc_url( get_post_meta( $post->ID, 'junkie_types_testimonial_website_url', true ) ); ?>" size="30" style="width: 99%;" placeholder="<?php echo esc_attr( 'http://www.google.com/' ); ?>" />
 		</div>
 
 	</div><!-- #junkie-types-block -->
@@ -67,19 +67,19 @@ function junkie_types_testimonials_metaboxes_display( $post ) {
 	<div id="junkie-types-block">
 
 		<div class="junkie-types-label">
-			<label for="junkie-types-testimonials-age">
+			<label for="junkie-types-testimonial-age">
 				<strong><?php _e( 'Age', 'junkie-types' ); ?></strong><br />
 				<span class="description"><?php _e( "Customer's age", 'junkie-types' ); ?></span>
 			</label>
 		</div>
 
 		<div class="junkie-types-input">
-			<input type="text" name="junkie-types-testimonials-age" id="junkie-types-testimonials-age" value="<?php echo esc_attr( get_post_meta( $post->ID, 'junkie_types_testimonials_age', true ) ); ?>" size="30" style="width: 99%;" placeholder="<?php echo esc_attr( '25 years' ); ?>" />
+			<input type="text" name="junkie-types-testimonial-age" id="junkie-types-testimonial-age" value="<?php echo esc_attr( get_post_meta( $post->ID, 'junkie_types_testimonial_age', true ) ); ?>" size="30" style="width: 99%;" placeholder="<?php echo esc_attr( '25 years' ); ?>" />
 		</div>
 
 	</div><!-- #junkie-types-block -->
 
-	<?php do_action( 'junkie_types_testimonials_metaboxes_after' ); ?>
+	<?php do_action( 'junkie_types_testimonial_metaboxes_after' ); ?>
 
 	<?php
 }
@@ -87,18 +87,18 @@ function junkie_types_testimonials_metaboxes_display( $post ) {
 /**
  * Saves the metadata.
  */
-function junkie_types_testimonials_save_metaboxes( $post_id, $post ) {
+function junkie_types_testimonial_save_metaboxes( $post_id, $post ) {
 
-	if ( ! isset( $_POST['junkie-types-testimonials-metaboxes-nonce'] ) || ! wp_verify_nonce( $_POST['junkie-types-testimonials-metaboxes-nonce'], basename( __FILE__ ) ) )
+	if ( ! isset( $_POST['junkie-types-testimonial-metaboxes-nonce'] ) || ! wp_verify_nonce( $_POST['junkie-types-testimonial-metaboxes-nonce'], basename( __FILE__ ) ) )
 		return;
 
 	if ( ! current_user_can( 'edit_post', $post_id ) )
 		return;
 
 	$meta = array(
-		'junkie_types_testimonials_website_name' => esc_attr( $_POST['junkie-types-testimonials-website-name'] ),
-		'junkie_types_testimonials_website_url'  => esc_url_raw( $_POST['junkie-types-testimonials-website-url'] ),
-		'junkie_types_testimonials_age'          => esc_attr( $_POST['junkie-types-testimonials-age'] ),
+		'junkie_types_testimonial_website_name' => esc_attr( $_POST['junkie-types-testimonial-website-name'] ),
+		'junkie_types_testimonial_website_url'  => esc_url_raw( $_POST['junkie-types-testimonial-website-url'] ),
+		'junkie_types_testimonial_age'          => esc_attr( $_POST['junkie-types-testimonial-age'] ),
 	);
 
 	foreach ( $meta as $meta_key => $new_meta_value ) {
@@ -120,19 +120,19 @@ function junkie_types_testimonials_save_metaboxes( $post_id, $post ) {
 	}
 
 }
-add_action( 'save_post', 'junkie_types_testimonials_save_metaboxes', 10, 2 );
+add_action( 'save_post', 'junkie_types_testimonial_save_metaboxes', 10, 2 );
 
 /**
  * Replace 'Featured Image' title.
  */
-function junkie_types_testimonials_replace_featured_image_title() {
+function junkie_types_testimonial_replace_featured_image_title() {
 
 	// Check current screen.
-	if ( 'testimonials' != get_current_screen()->post_type )
+	if ( 'testimonial' != get_current_screen()->post_type )
 		return;
 
-    remove_meta_box( 'postimagediv', 'testimonials', 'side' );
-    add_meta_box( 'postimagediv', __( "Customer's Photo", 'junkie-types' ), 'post_thumbnail_meta_box', 'testimonials', 'side', 'default' );
+    remove_meta_box( 'postimagediv', 'testimonial', 'side' );
+    add_meta_box( 'postimagediv', __( "Customer's Photo", 'junkie-types' ), 'post_thumbnail_meta_box', 'testimonial', 'side', 'default' );
 
 }
-add_action( 'do_meta_boxes', 'junkie_types_testimonials_replace_featured_image_title' );
+add_action( 'do_meta_boxes', 'junkie_types_testimonial_replace_featured_image_title' );

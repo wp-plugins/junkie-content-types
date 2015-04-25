@@ -6,9 +6,9 @@
 /**
  * Register the post type
  */
-function junkie_types_register_services_post_type() {
+function junkie_types_register_service_post_type() {
 
-	if ( post_type_exists( 'services' ) ) {
+	if ( post_type_exists( 'service' ) ) {
 		return;
 	}
 
@@ -28,7 +28,7 @@ function junkie_types_register_services_post_type() {
 	);
 
 	$args = array(
-		'labels' => apply_filters( 'junkie_types_services_labels', $labels ),
+		'labels' => apply_filters( 'junkie_types_service_labels', $labels ),
 		'supports' => array(
 			'title',
 			'editor',
@@ -53,32 +53,32 @@ function junkie_types_register_services_post_type() {
 		'query_var'           => true,
 	);
 
-	register_post_type( 'services', apply_filters( 'junkie_types_services_args', $args ) );
+	register_post_type( 'service', apply_filters( 'junkie_types_service_args', $args ) );
 
 }
-add_action( 'init', 'junkie_types_register_services_post_type' );
+add_action( 'init', 'junkie_types_register_service_post_type' );
 
 /**
  * Change ‘Enter Title Here’ text for the Services post type.
  */
-function junkie_types_change_services_default_title( $title ) {
+function junkie_types_change_service_default_title( $title ) {
 	$screen = get_current_screen();
 
-	if ( 'services' == $screen->post_type ) {
-		$title = esc_html__( 'Enter the services name here', 'junkie-types' );
+	if ( 'service' == $screen->post_type ) {
+		$title = esc_html__( 'Enter the service name here', 'junkie-types' );
 	}
 
 	return $title;
 }
-add_filter( 'enter_title_here', 'junkie_types_change_services_default_title' );
+add_filter( 'enter_title_here', 'junkie_types_change_service_default_title' );
 
 /**
  * Update messages for the Services admin.
  */
-function junkie_types_services_updated_messages( $messages ) {
+function junkie_types_service_updated_messages( $messages ) {
 	global $post;
 
-	$messages['services'] = array(
+	$messages['service'] = array(
 		0  => '', // Unused. Messages start at index 1.
 		1  => sprintf( __( 'Service updated. <a href="%s">View Service</a>', 'junkie-types'), esc_url( get_permalink( $post->ID ) ) ),
 		2  => esc_html__( 'Custom field updated.', 'junkie-types' ),
@@ -86,24 +86,24 @@ function junkie_types_services_updated_messages( $messages ) {
 		4  => esc_html__( 'Service updated.', 'junkie-types' ),
 		/* translators: %s: date and time of the revision */
 		5  => isset( $_GET['revision'] ) ? sprintf( esc_html__( 'Service restored to revision from %s', 'junkie-types'), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-		6  => sprintf( __( 'Service published. <a href="%s">View services</a>', 'junkie-types' ), esc_url( get_permalink( $post->ID ) ) ),
+		6  => sprintf( __( 'Service published. <a href="%s">View service</a>', 'junkie-types' ), esc_url( get_permalink( $post->ID ) ) ),
 		7  => esc_html__( 'Service saved.', 'junkie-types' ),
-		8  => sprintf( __( 'Service submitted. <a target="_blank" href="%s">Preview services</a>', 'junkie-types'), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post->ID ) ) ) ),
-		9  => sprintf( __( 'Service scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview services</a>', 'junkie-types' ),
+		8  => sprintf( __( 'Service submitted. <a target="_blank" href="%s">Preview service</a>', 'junkie-types'), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post->ID ) ) ) ),
+		9  => sprintf( __( 'Service scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview service</a>', 'junkie-types' ),
 		// translators: Publish box date format, see http://php.net/date
 		date_i18n( __( 'M j, Y @ G:i', 'junkie-types' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post->ID ) ) ),
-		10 => sprintf( __( 'Service draft updated. <a target="_blank" href="%s">Preview services</a>', 'junkie-types' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post->ID ) ) ) ),
+		10 => sprintf( __( 'Service draft updated. <a target="_blank" href="%s">Preview service</a>', 'junkie-types' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post->ID ) ) ) ),
 	);
 
 	return $messages;
 }
-add_filter( 'post_updated_messages', 'junkie_types_services_updated_messages' );
+add_filter( 'post_updated_messages', 'junkie_types_service_updated_messages' );
 
 /**
  * Change ‘Title’ column label
  * Add Featured Image column
  */
-function junkie_types_edit_services_admin_columns( $columns ) {
+function junkie_types_edit_service_admin_columns( $columns ) {
 	unset( $columns['title'] );
 
 	$new_columns = array(
@@ -119,12 +119,12 @@ function junkie_types_edit_services_admin_columns( $columns ) {
 
 	return $columns;
 }
-add_filter( 'manage_edit-services_columns', 'junkie_types_edit_services_admin_columns' );
+add_filter( 'manage_edit-service_columns', 'junkie_types_edit_service_admin_columns' );
 
 /**
  * Add featured image to column
  */
-function junkie_types_services_image_column( $column, $post_id ) {
+function junkie_types_service_image_column( $column, $post_id ) {
 	global $post;
 
 	switch ( $column ) {
@@ -133,4 +133,4 @@ function junkie_types_services_image_column( $column, $post_id ) {
 			break;
 	}
 }
-add_filter( 'manage_services_posts_custom_column', 'junkie_types_services_image_column', 10, 2 );
+add_filter( 'manage_service_posts_custom_column', 'junkie_types_service_image_column', 10, 2 );

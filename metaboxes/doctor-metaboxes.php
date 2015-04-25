@@ -6,45 +6,45 @@
 /**
  * Registers new meta boxes.
  */
-function junkie_types_register_doctors_metaboxes() {
+function junkie_types_register_doctor_metaboxes() {
 
 	// Check current screen.
-	if ( 'doctors' != get_current_screen()->post_type )
+	if ( 'doctor' != get_current_screen()->post_type )
 		return;
 
 	// Register the meta box.
 	add_meta_box( 
-		'junkie-types-doctors-metaboxes',
+		'junkie-types-doctor-metaboxes',
 		esc_html__( 'Doctor Options', 'junkie-types' ),
-		'junkie_types_doctors_metaboxes_display',
-		'doctors',
+		'junkie_types_doctor_metaboxes_display',
+		'doctor',
 		'normal',
 		'high'
 	);
 
 }
-add_action( 'add_meta_boxes', 'junkie_types_register_doctors_metaboxes' );
+add_action( 'add_meta_boxes', 'junkie_types_register_doctor_metaboxes' );
 
 /**
  * Displays the content of the meta boxes.
  */
-function junkie_types_doctors_metaboxes_display( $post ) {
+function junkie_types_doctor_metaboxes_display( $post ) {
 
-	wp_nonce_field( basename( __FILE__ ), 'junkie-types-doctors-metaboxes-nonce' ); ?>
+	wp_nonce_field( basename( __FILE__ ), 'junkie-types-doctor-metaboxes-nonce' ); ?>
 
-	<?php do_action( 'junkie_types_doctors_metaboxes_before' ); ?>
+	<?php do_action( 'junkie_types_doctor_metaboxes_before' ); ?>
 
 	<div id="junkie-types-block">
 
 		<div class="junkie-types-label">
-			<label for="junkie-types-doctors-education">
+			<label for="junkie-types-doctor-education">
 				<strong><?php _e( 'Education', 'junkie-types' ); ?></strong><br />
 				<span class="description"><?php _e( "The doctor's education", 'junkie-types' ); ?></span>
 			</label>
 		</div>
 
 		<div class="junkie-types-input">
-			<input type="text" name="junkie-types-doctors-education" id="junkie-types-doctors-education" value="<?php echo esc_attr( get_post_meta( $post->ID, 'junkie_types_doctors_education', true ) ); ?>" size="30" style="width: 99%;" />
+			<input type="text" name="junkie-types-doctor-education" id="junkie-types-doctor-education" value="<?php echo esc_attr( get_post_meta( $post->ID, 'junkie_types_doctor_education', true ) ); ?>" size="30" style="width: 99%;" />
 		</div>
 
 	</div><!-- #junkie-types-block -->
@@ -52,14 +52,14 @@ function junkie_types_doctors_metaboxes_display( $post ) {
 	<div id="junkie-types-block">
 
 		<div class="junkie-types-label">
-			<label for="junkie-types-doctors-work-days">
+			<label for="junkie-types-doctor-work-days">
 				<strong><?php _e( 'Work Days', 'junkie-types' ); ?></strong><br />
 				<span class="description"><?php _e( "The doctor's work days", 'junkie-types' ); ?></span>
 			</label>
 		</div>
 
 		<div class="junkie-types-input">
-			<input type="text" name="junkie-types-doctors-work-days" id="junkie-types-doctors-work-days" value="<?php echo esc_attr( get_post_meta( $post->ID, 'junkie_types_doctors_work_days', true ) ); ?>" size="30" style="width: 99%;" placeholder="<?php echo esc_attr( 'Wednesday, Thursday, Friday' ); ?>" />
+			<input type="text" name="junkie-types-doctor-work-days" id="junkie-types-doctor-work-days" value="<?php echo esc_attr( get_post_meta( $post->ID, 'junkie_types_doctor_work_days', true ) ); ?>" size="30" style="width: 99%;" placeholder="<?php echo esc_attr( 'Wednesday, Thursday, Friday' ); ?>" />
 		</div>
 
 	</div><!-- #junkie-types-block -->
@@ -67,14 +67,14 @@ function junkie_types_doctors_metaboxes_display( $post ) {
 	<div id="junkie-types-block">
 
 		<div class="junkie-types-label">
-			<label for="junkie-types-doctors-twitter">
+			<label for="junkie-types-doctor-twitter">
 				<strong><?php _e( 'Twitter', 'junkie-types' ); ?></strong><br />
 				<span class="description"><?php _e( 'Twitter URL', 'junkie-types' ); ?></span>
 			</label>
 		</div>
 
 		<div class="junkie-types-input">
-			<input type="text" name="junkie-types-doctors-twitter" id="junkie-types-doctors-twitter" value="<?php echo esc_url( get_post_meta( $post->ID, 'junkie_types_doctors_twitter_url', true ) ); ?>" size="30" style="width: 99%;" placeholder="<?php echo esc_attr( 'https://twitter.com/username' ); ?>" />
+			<input type="text" name="junkie-types-doctor-twitter" id="junkie-types-doctor-twitter" value="<?php echo esc_url( get_post_meta( $post->ID, 'junkie_types_doctor_twitter_url', true ) ); ?>" size="30" style="width: 99%;" placeholder="<?php echo esc_attr( 'https://twitter.com/username' ); ?>" />
 		</div>
 
 	</div><!-- #junkie-types-block -->
@@ -82,14 +82,14 @@ function junkie_types_doctors_metaboxes_display( $post ) {
 	<div id="junkie-types-block">
 
 		<div class="junkie-types-label">
-			<label for="junkie-types-doctors-facebook">
+			<label for="junkie-types-doctor-facebook">
 				<strong><?php _e( 'Facebook', 'junkie-types' ); ?></strong><br />
 				<span class="description"><?php _e( 'Facebook URL', 'junkie-types' ); ?></span>
 			</label>
 		</div>
 
 		<div class="junkie-types-input">
-			<input type="text" name="junkie-types-doctors-facebook" id="junkie-types-doctors-facebook" value="<?php echo esc_url( get_post_meta( $post->ID, 'junkie_types_doctors_facebook_url', true ) ); ?>" size="30" style="width: 99%;" placeholder="<?php echo esc_attr( 'http://www.facebook.com/username' ); ?>" />
+			<input type="text" name="junkie-types-doctor-facebook" id="junkie-types-doctor-facebook" value="<?php echo esc_url( get_post_meta( $post->ID, 'junkie_types_doctor_facebook_url', true ) ); ?>" size="30" style="width: 99%;" placeholder="<?php echo esc_attr( 'http://www.facebook.com/username' ); ?>" />
 		</div>
 
 	</div><!-- #junkie-types-block -->
@@ -97,14 +97,14 @@ function junkie_types_doctors_metaboxes_display( $post ) {
 	<div id="junkie-types-block">
 
 		<div class="junkie-types-label">
-			<label for="junkie-types-doctors-gplus">
+			<label for="junkie-types-doctor-gplus">
 				<strong><?php _e( 'Google Plus', 'junkie-types' ); ?></strong><br />
 				<span class="description"><?php _e( 'Google Plus URL', 'junkie-types' ); ?></span>
 			</label>
 		</div>
 
 		<div class="junkie-types-input">
-			<input type="text" name="junkie-types-doctors-gplus" id="junkie-types-doctors-gplus" value="<?php echo esc_url( get_post_meta( $post->ID, 'junkie_types_doctors_googleplus_url', true ) ); ?>" size="30" style="width: 99%;" placeholder="<?php echo esc_attr( 'https://plus.google.com/+username' ); ?>" />
+			<input type="text" name="junkie-types-doctor-gplus" id="junkie-types-doctor-gplus" value="<?php echo esc_url( get_post_meta( $post->ID, 'junkie_types_doctor_googleplus_url', true ) ); ?>" size="30" style="width: 99%;" placeholder="<?php echo esc_attr( 'https://plus.google.com/+username' ); ?>" />
 		</div>
 
 	</div><!-- #junkie-types-block -->
@@ -112,19 +112,19 @@ function junkie_types_doctors_metaboxes_display( $post ) {
 	<div id="junkie-types-block">
 
 		<div class="junkie-types-label">
-			<label for="junkie-types-doctors-linkedin">
+			<label for="junkie-types-doctor-linkedin">
 				<strong><?php _e( 'LinkedIn', 'junkie-types' ); ?></strong><br />
 				<span class="description"><?php _e( 'LinkedIn URL', 'junkie-types' ); ?></span>
 			</label>
 		</div>
 
 		<div class="junkie-types-input">
-			<input type="text" name="junkie-types-doctors-linkedin" id="junkie-types-doctors-linkedin" value="<?php echo esc_url( get_post_meta( $post->ID, 'junkie_types_doctors_linkedin_url', true ) ); ?>" size="30" style="width: 99%;" placeholder="<?php echo esc_attr( 'https://www.linkedin.com/in/username' ); ?>" />
+			<input type="text" name="junkie-types-doctor-linkedin" id="junkie-types-doctor-linkedin" value="<?php echo esc_url( get_post_meta( $post->ID, 'junkie_types_doctor_linkedin_url', true ) ); ?>" size="30" style="width: 99%;" placeholder="<?php echo esc_attr( 'https://www.linkedin.com/in/username' ); ?>" />
 		</div>
 
 	</div><!-- #junkie-types-block -->
 
-	<?php do_action( 'junkie_types_doctors_metaboxes_after' ); ?>
+	<?php do_action( 'junkie_types_doctor_metaboxes_after' ); ?>
 
 	<?php
 }
@@ -132,21 +132,21 @@ function junkie_types_doctors_metaboxes_display( $post ) {
 /**
  * Saves the metadata.
  */
-function junkie_types_doctors_save_metaboxes( $post_id, $post ) {
+function junkie_types_doctor_save_metaboxes( $post_id, $post ) {
 
-	if ( ! isset( $_POST['junkie-types-doctors-metaboxes-nonce'] ) || ! wp_verify_nonce( $_POST['junkie-types-doctors-metaboxes-nonce'], basename( __FILE__ ) ) )
+	if ( ! isset( $_POST['junkie-types-doctor-metaboxes-nonce'] ) || ! wp_verify_nonce( $_POST['junkie-types-doctor-metaboxes-nonce'], basename( __FILE__ ) ) )
 		return;
 
 	if ( ! current_user_can( 'edit_post', $post_id ) )
 		return;
 
 	$meta = array(
-		'junkie_types_doctors_education'      => esc_attr( $_POST['junkie-types-doctors-education'] ),
-		'junkie_types_doctors_work_days'      => esc_attr( $_POST['junkie-types-doctors-work-days'] ),
-		'junkie_types_doctors_twitter_url'    => esc_url_raw( $_POST['junkie-types-doctors-twitter'] ),
-		'junkie_types_doctors_facebook_url'   => esc_url_raw( $_POST['junkie-types-doctors-facebook'] ),
-		'junkie_types_doctors_googleplus_url' => esc_url_raw( $_POST['junkie-types-doctors-gplus'] ),
-		'junkie_types_doctors_linkedin_url'   => esc_url_raw( $_POST['junkie-types-doctors-linkedin'] )
+		'junkie_types_doctor_education'      => esc_attr( $_POST['junkie-types-doctor-education'] ),
+		'junkie_types_doctor_work_days'      => esc_attr( $_POST['junkie-types-doctor-work-days'] ),
+		'junkie_types_doctor_twitter_url'    => esc_url_raw( $_POST['junkie-types-doctor-twitter'] ),
+		'junkie_types_doctor_facebook_url'   => esc_url_raw( $_POST['junkie-types-doctor-facebook'] ),
+		'junkie_types_doctor_googleplus_url' => esc_url_raw( $_POST['junkie-types-doctor-gplus'] ),
+		'junkie_types_doctor_linkedin_url'   => esc_url_raw( $_POST['junkie-types-doctor-linkedin'] )
 	);
 
 	foreach ( $meta as $meta_key => $new_meta_value ) {
@@ -168,19 +168,19 @@ function junkie_types_doctors_save_metaboxes( $post_id, $post ) {
 	}
 
 }
-add_action( 'save_post', 'junkie_types_doctors_save_metaboxes', 10, 2 );
+add_action( 'save_post', 'junkie_types_doctor_save_metaboxes', 10, 2 );
 
 /**
  * Replace 'Featured Image' title.
  */
-function junkie_types_doctors_replace_featured_image_title() {
+function junkie_types_doctor_replace_featured_image_title() {
 
 	// Check current screen.
-	if ( 'doctors' != get_current_screen()->post_type )
+	if ( 'doctor' != get_current_screen()->post_type )
 		return;
 
-    remove_meta_box( 'postimagediv', 'doctors', 'side' );
-    add_meta_box( 'postimagediv', __( "Doctor's Photo", 'junkie-types' ), 'post_thumbnail_meta_box', 'doctors', 'side', 'default' );
+    remove_meta_box( 'postimagediv', 'doctor', 'side' );
+    add_meta_box( 'postimagediv', __( "Doctor's Photo", 'junkie-types' ), 'post_thumbnail_meta_box', 'doctor', 'side', 'default' );
 
 }
-add_action( 'do_meta_boxes', 'junkie_types_doctors_replace_featured_image_title' );
+add_action( 'do_meta_boxes', 'junkie_types_doctor_replace_featured_image_title' );

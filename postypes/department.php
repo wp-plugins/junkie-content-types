@@ -6,9 +6,9 @@
 /**
  * Register the post type
  */
-function junkie_types_register_departments_post_type() {
+function junkie_types_register_department_post_type() {
 
-	if ( post_type_exists( 'departments' ) ) {
+	if ( post_type_exists( 'department' ) ) {
 		return;
 	}
 
@@ -28,7 +28,7 @@ function junkie_types_register_departments_post_type() {
 	);
 
 	$args = array(
-		'labels' => apply_filters( 'junkie_types_departments_labels', $labels ),
+		'labels' => apply_filters( 'junkie_types_department_labels', $labels ),
 		'supports' => array(
 			'title',
 			'editor',
@@ -53,32 +53,32 @@ function junkie_types_register_departments_post_type() {
 		'query_var'           => true,
 	);
 
-	register_post_type( 'departments', apply_filters( 'junkie_types_departments_args', $args ) );
+	register_post_type( 'department', apply_filters( 'junkie_types_department_args', $args ) );
 
 }
-add_action( 'init', 'junkie_types_register_departments_post_type' );
+add_action( 'init', 'junkie_types_register_department_post_type' );
 
 /**
  * Change ‘Enter Title Here’ text for the Departments post type.
  */
-function junkie_types_change_departments_default_title( $title ) {
+function junkie_types_change_department_default_title( $title ) {
 	$screen = get_current_screen();
 
-	if ( 'departments' == $screen->post_type ) {
-		$title = esc_html__( "Enter the departments's name here", 'junkie-types' );
+	if ( 'department' == $screen->post_type ) {
+		$title = esc_html__( "Enter the department's name here", 'junkie-types' );
 	}
 
 	return $title;
 }
-add_filter( 'enter_title_here', 'junkie_types_change_departments_default_title' );
+add_filter( 'enter_title_here', 'junkie_types_change_department_default_title' );
 
 /**
  * Update messages for the Departments admin.
  */
-function junkie_types_departments_updated_messages( $messages ) {
+function junkie_types_department_updated_messages( $messages ) {
 	global $post;
 
-	$messages['departments'] = array(
+	$messages['department'] = array(
 		0  => '', // Unused. Messages start at index 1.
 		1  => sprintf( __( 'Department updated. <a href="%s">View Department</a>', 'junkie-types'), esc_url( get_permalink( $post->ID ) ) ),
 		2  => esc_html__( 'Custom field updated.', 'junkie-types' ),
@@ -86,24 +86,24 @@ function junkie_types_departments_updated_messages( $messages ) {
 		4  => esc_html__( 'Department updated.', 'junkie-types' ),
 		/* translators: %s: date and time of the revision */
 		5  => isset( $_GET['revision'] ) ? sprintf( esc_html__( 'Department restored to revision from %s', 'junkie-types'), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-		6  => sprintf( __( 'Department published. <a href="%s">View departments</a>', 'junkie-types' ), esc_url( get_permalink( $post->ID ) ) ),
+		6  => sprintf( __( 'Department published. <a href="%s">View department</a>', 'junkie-types' ), esc_url( get_permalink( $post->ID ) ) ),
 		7  => esc_html__( 'Department saved.', 'junkie-types' ),
-		8  => sprintf( __( 'Department submitted. <a target="_blank" href="%s">Preview departments</a>', 'junkie-types'), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post->ID ) ) ) ),
-		9  => sprintf( __( 'Department scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview departments</a>', 'junkie-types' ),
+		8  => sprintf( __( 'Department submitted. <a target="_blank" href="%s">Preview department</a>', 'junkie-types'), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post->ID ) ) ) ),
+		9  => sprintf( __( 'Department scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview department</a>', 'junkie-types' ),
 		// translators: Publish box date format, see http://php.net/date
 		date_i18n( __( 'M j, Y @ G:i', 'junkie-types' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post->ID ) ) ),
-		10 => sprintf( __( 'Department draft updated. <a target="_blank" href="%s">Preview departments</a>', 'junkie-types' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post->ID ) ) ) ),
+		10 => sprintf( __( 'Department draft updated. <a target="_blank" href="%s">Preview department</a>', 'junkie-types' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post->ID ) ) ) ),
 	);
 
 	return $messages;
 }
-add_filter( 'post_updated_messages', 'junkie_types_departments_updated_messages' );
+add_filter( 'post_updated_messages', 'junkie_types_department_updated_messages' );
 
 /**
  * Change ‘Title’ column label
  * Add Featured Image column
  */
-function junkie_types_edit_departments_admin_columns( $columns ) {
+function junkie_types_edit_department_admin_columns( $columns ) {
 	unset( $columns['title'] );
 
 	$new_columns = array(
@@ -119,12 +119,12 @@ function junkie_types_edit_departments_admin_columns( $columns ) {
 
 	return $columns;
 }
-add_filter( 'manage_edit-departments_columns', 'junkie_types_edit_departments_admin_columns' );
+add_filter( 'manage_edit-department_columns', 'junkie_types_edit_department_admin_columns' );
 
 /**
  * Add featured image to column
  */
-function junkie_types_departments_image_column( $column, $post_id ) {
+function junkie_types_department_image_column( $column, $post_id ) {
 	global $post;
 
 	switch ( $column ) {
@@ -133,4 +133,4 @@ function junkie_types_departments_image_column( $column, $post_id ) {
 			break;
 	}
 }
-add_filter( 'manage_departments_posts_custom_column', 'junkie_types_departments_image_column', 10, 2 );
+add_filter( 'manage_department_posts_custom_column', 'junkie_types_department_image_column', 10, 2 );

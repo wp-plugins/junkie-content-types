@@ -35,7 +35,7 @@ function junkie_types_register_speciality_tax() {
 		'rewrite'           => array( 'slug' => 'speciality' ),
 	);
 
-	register_taxonomy( 'speciality', 'doctors', apply_filters( 'junkie_types_speciality_tax_args', $args ) );
+	register_taxonomy( 'speciality', 'doctor', apply_filters( 'junkie_types_speciality_tax_args', $args ) );
 
 }
 add_action( 'init', 'junkie_types_register_speciality_tax' );

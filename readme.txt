@@ -3,7 +3,7 @@ Contributors: themejunkie, satrya
 Tags: custom post type, post type, slider, service, team, testimonial, doctor, department, feature
 Requires at least: 3.7
 Tested up to: 4.2
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -75,6 +75,9 @@ add_theme_support( 'junkie-slider' );
 `
 
 == Changelog ==
+
+= 1.1.2 - 04/24/2015 =
+* Revert the post types name.
 
 = 1.1.1 - 04/23/2015 =
 * Rename all post types
