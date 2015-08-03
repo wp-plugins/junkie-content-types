@@ -1,5 +1,5 @@
 === Junkie Types ===
-Contributors: themejunkie, satrya
+Contributors: themejunkie
 Tags: custom post type, post type, slider, service, team, testimonial, doctor, department, feature
 Requires at least: 3.8
 Tested up to: 4.2.1
